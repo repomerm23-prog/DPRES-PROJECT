@@ -1,4 +1,3 @@
-import image_eb676453f7fa58e46cc7a87afbf8720a41cd2d30 from 'figma:asset/eb676453f7fa58e46cc7a87afbf8720a41cd2d30.png';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
@@ -28,18 +27,11 @@ interface LandingPageProps {
 }
 
 export function LandingPage({ userData }: LandingPageProps) {
-  const { t } = useLanguage();
-  
-  // Generate dynamic greeting messages
-  const greetings = [
-    `Keep going, ${userData?.studentName || 'Student'}! You're almost there 🚀`,
-    `Stay safe, stay smart ${userData?.studentName || 'Student'} 🌍`,
-    `Ready to level up your safety skills, ${userData?.studentName || 'Student'}? 💪`,
-    `Building a safer tomorrow, one step at a time! ${userData?.studentName ? 'Welcome back, ' + userData.studentName : 'Welcome'} ✨`,
-    `Your safety journey continues, ${userData?.studentName || 'Student'}! 🛡️`
-  ];
+  const { t, language } = useLanguage();
 
-  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  // Personalized greeting using translations
+  const welcomeBack = userData ? t('dashboard.welcomeBack').replace('{name}', userData.studentName) : '';
+  const safetyJourney = userData ? t('dashboard.safetyJourney').replace('{name}', userData.studentName) : '';
 
   return (
     <div className="min-h-screen">
@@ -115,10 +107,10 @@ export function LandingPage({ userData }: LandingPageProps) {
               {userData && (
                 <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
                   <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 break-words">
-                    Welcome back, {userData.studentName} 👋
+                    {welcomeBack}
                   </h3>
                   <p className="text-white/80 text-sm sm:text-base lg:text-lg break-words">{userData.schoolName}</p>
-                  <p className="text-white/60 text-xs sm:text-sm mt-2 break-words">{randomGreeting}</p>
+                  <p className="text-white/60 text-xs sm:text-sm mt-2 break-words">{safetyJourney}</p>
                 </div>
               )}
               

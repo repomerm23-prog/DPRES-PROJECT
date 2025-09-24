@@ -44,13 +44,18 @@ const getTranslation = (key: string, lang: Language): string => {
   }
   const langTranslations = translations[lang] as Record<string, string>;
   const enTranslations = translations['en'] as Record<string, string>;
-  return langTranslations[key] || enTranslations[key] || key;
+  // Support variable replacement: {name}
+  const translate = langTranslations[key] || enTranslations[key] || key;
+  return translate;
 };
 
 // Translation data
 const getTranslations = () => {
   return {
     en: {
+      // Personalized Greetings
+      'dashboard.welcomeBack': 'Welcome back, {name} 👋',
+      'dashboard.safetyJourney': 'Your safety journey continues, {name}! 🛡️',
       // Navigation
       'nav.dashboard': 'Dashboard',
       'nav.modules': 'Training Modules',
@@ -309,6 +314,9 @@ const getTranslations = () => {
       'common.close': 'Close',
     },
     hi: {
+      // Personalized Greetings
+      'dashboard.welcomeBack': 'फिर से स्वागत है, {name} 👋',
+      'dashboard.safetyJourney': 'आपकी सुरक्षा यात्रा जारी है, {name}! 🛡️',
       // Navigation
       'nav.dashboard': 'डैशबोर्ड',
       'nav.modules': 'प्रशिक्षण मॉड्यूल',
@@ -567,6 +575,9 @@ const getTranslations = () => {
       'common.close': 'बंद करें',
     },
     bn: {
+      // Personalized Greetings
+      'dashboard.welcomeBack': 'আবার স্বাগতম, {name} 👋',
+      'dashboard.safetyJourney': 'আপনার নিরাপত্তার যাত্রা চলতে থাকুক, {name}! 🛡️',
       // Navigation
       'nav.dashboard': 'ড্যাশবোর্ড',
       'nav.modules': 'প্রশিক্ষণ মডিউল',
