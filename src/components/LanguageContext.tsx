@@ -39,7 +39,12 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 // Translation function
 const getTranslation = (key: string, lang: Language): string => {
   const translations = getTranslations();
-  return translations[lang]?.[key] || translations['en'][key] || key;
+  if (!translations[lang]) {
+    lang = 'en';
+  }
+  const langTranslations = translations[lang] as Record<string, string>;
+  const enTranslations = translations['en'] as Record<string, string>;
+  return langTranslations[key] || enTranslations[key] || key;
 };
 
 // Translation data
@@ -183,8 +188,7 @@ const getTranslations = () => {
       'dashboard.emergencyContacts.disaster': 'Disaster Management',
       'dashboard.emergencyContacts.tapToCall': 'Quick access to emergency services. Tap to call immediately.',
       'dashboard.emergencyContacts.call': 'Call',
-      'dashboard.recentActivity': 'Recent Activity',
-      'dashboard.recentActivityDesc': 'Your latest learning updates',
+  // ...existing code...
       'dashboard.recentActivity.module4': 'Module 4 completed – Emergency Response',
       'dashboard.recentActivity.vrFire': 'VR Fire Drill completed',
       'dashboard.recentActivity.evacuationTime': 'Evacuation time: 3 minutes 45 seconds',
@@ -442,8 +446,7 @@ const getTranslations = () => {
       'dashboard.emergencyContacts.disaster': 'आपदा प्रबंधन',
       'dashboard.emergencyContacts.tapToCall': 'आपातकालीन सेवाओं तक त्वरित पहुंच। तुरंत कॉल करने के लिए टैप करें।',
       'dashboard.emergencyContacts.call': 'कॉल करें',
-      'dashboard.recentActivity': 'हाल की गतिविधि',
-      'dashboard.recentActivityDesc': 'आपके नवीनतम शिक्षण अपडेट',
+  // ...existing code...
       'dashboard.recentActivity.module4': 'मॉड्यूल 4 पूरा – आपातकालीन प्रतिक्रिया',
       'dashboard.recentActivity.vrFire': 'वीआर अग्नि ड्रिल पूरा',
       'dashboard.recentActivity.evacuationTime': 'निकासी का समय: 3 मिनट 45 सेकंड',
@@ -697,12 +700,11 @@ const getTranslations = () => {
       'dashboard.emergencyContacts': 'জরুরি যোগাযোগ',
       'dashboard.emergencyContacts.fire': 'দমকল বিভাগ',
       'dashboard.emergencyContacts.police': 'পুলিশ',
-      'dashboard.emergencyContacts.medical': 'চিকিৎসা জরুরি অবস্থা',
+      'dashboard.emergencyContacts.medical': 'চিকিত্সা জরুরি অবস্থা',
       'dashboard.emergencyContacts.disaster': 'দুর্যোগ ব্যবস্থাপনা',
       'dashboard.emergencyContacts.tapToCall': 'জরুরি সেবায় দ্রুত অ্যাক্সেস। তাৎক্ষণিক কল করতে ট্যাপ করুন।',
       'dashboard.emergencyContacts.call': 'কল করুন',
-      'dashboard.recentActivity': 'সাম্প্রতিক কার্যকলাপ',
-      'dashboard.recentActivityDesc': 'আপনার সর্বশেষ শেখার আপডেট',
+  // ...existing code...
       'dashboard.recentActivity.module4': 'মডিউল ৪ সম্পন্ন – জরুরি প্রতিক্রিয়া',
       'dashboard.recentActivity.vrFire': 'ভিআর অগ্নি ড্রিল সম্পন্ন',
       'dashboard.recentActivity.evacuationTime': 'নিকাশীর সময়: ৩ মিনিট ৪৫ সেকেন্ড',
@@ -821,6 +823,16 @@ const getTranslations = () => {
       'common.delete': 'মুছে ফেলুন',
       'common.view': 'দেখুন',
       'common.close': 'বন্ধ করুন',
-    }
+    },
+    ta: {},
+    te: {},
+    mr: {},
+    gu: {},
+    kn: {},
+    ml: {},
+    or: {},
+    pa: {},
+    as: {},
+    ur: {}
   };
 };

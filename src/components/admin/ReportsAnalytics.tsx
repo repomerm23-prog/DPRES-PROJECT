@@ -12,7 +12,7 @@ import { allInstitutions, schools, colleges } from '../shared/institutionsData';
 
 export function ReportsAnalytics() {
   const exportReport = (format: string) => {
-    console.log(`Exporting report in ${format} format`);
+  // Removed console.log for production optimization
   };
 
   // Performance data based on real institutions

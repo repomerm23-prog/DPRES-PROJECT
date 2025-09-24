@@ -77,13 +77,13 @@ export function CertificateManager() {
   };
 
   const generateCertificate = (institutionId: string) => {
-    console.log('Generating certificate for institution:', institutionId);
+  // Removed console.log for production optimization
     // Mock certificate generation
     alert('Certificate generation initiated. Institution will be notified once ready for download.');
   };
 
   const downloadCertificate = (certificateId: string) => {
-    console.log('Downloading certificate:', certificateId);
+  // Removed console.log for production optimization
     // Mock download
     const link = document.createElement('a');
     link.href = `data:application/pdf;base64,JVBERi0xLjQKMSAwIG9iajw...`; // Mock PDF data

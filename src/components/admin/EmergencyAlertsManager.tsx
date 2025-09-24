@@ -172,7 +172,7 @@ export function EmergencyAlertsManager() {
       actions: ['Alert created and distributed']
     };
     
-    console.log('Creating new emergency alert:', alertData);
+  // Removed console.log for production optimization
     alert('Emergency alert created and sent to all selected institutions.');
     setShowCreateAlert(false);
     
@@ -291,7 +291,7 @@ export function EmergencyAlertsManager() {
                   <Label>Affected Regions</Label>
                   <Select 
                     value=""
-                    onValueChange={(value) => {
+                    onValueChange={(value: string) => {
                       if (!newAlert.affectedRegions.includes(value)) {
                         setNewAlert(prev => ({
                           ...prev,
@@ -339,7 +339,7 @@ export function EmergencyAlertsManager() {
                   <Label>Target Institutions</Label>
                   <Select 
                     value=""
-                    onValueChange={(value) => {
+                    onValueChange={(value: string) => {
                       if (!newAlert.institutions.includes(value)) {
                         setNewAlert(prev => ({
                           ...prev,
