@@ -1,5 +1,3 @@
-Got it 👍 I’ll clean up your draft into a well-spaced, professional GitHub README with consistent Markdown formatting. Here’s the polished version with perfect spacing and alignment:
-
 # DPRES – Disaster Preparedness Platform  
 
 The **DPRES Website** is a prototype platform designed to spread awareness, train, and prepare students and institutions for disaster risk management. It focuses on prevention, preparedness, and resilience through interactive modules, real-time alerts, and VR-based drills.  
@@ -70,4 +68,3 @@ This project is open-source and available under the MIT License.
 - Proper line breaks for readability  
 - Inline links where useful  
 
-👉 Do you also want me to add a **📸 Screenshots & Preview section** (with placeholders), so it looks polished and ready for when you drag-and-drop images?
