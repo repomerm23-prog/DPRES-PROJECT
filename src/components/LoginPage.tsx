@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import { useIsMobile } from './hooks/useIsMobile';
+import { schools, colleges } from './shared/institutionsData';
 
 interface LoginPageProps {
   onLogin: (userData: {
@@ -66,25 +67,27 @@ export function LoginPage({ onLogin, onAdminLogin }: LoginPageProps) {
     };
   }, []);
 
-  // Mock school and college data
-  const schools = [
-    { id: 'dps-001', name: 'Delhi Public School', code: 'DPS-001', type: 'school' },
-    { id: 'kv-002', name: 'Kendriya Vidyalaya No. 1', code: 'KV-002', type: 'school' },
-    { id: 'dav-003', name: 'DAV Public School', code: 'DAV-003', type: 'school' },
-    { id: 'aps-004', name: 'Army Public School', code: 'APS-004', type: 'school' },
-    { id: 'ryan-005', name: 'Ryan International School', code: 'RYAN-005', type: 'school' }
-  ];
-
-  const colleges = [
-    { id: 'iit-001', name: 'IIT Delhi', code: 'IIT-001', type: 'college' },
-    { id: 'du-002', name: 'Delhi University', code: 'DU-002', type: 'college' },
-    { id: 'nit-003', name: 'NIT Warangal', code: 'NIT-003', type: 'college' },
-    { id: 'bits-004', name: 'BITS Pilani', code: 'BITS-004', type: 'college' },
-    { id: 'iim-005', name: 'IIM Bangalore', code: 'IIM-005', type: 'college' },
-    { id: 'iisc-006', name: 'IISc Bangalore', code: 'IISC-006', type: 'college' }
-  ];
-
-  const getInstitutions = () => institutionType === 'school' ? schools : colleges;
+  // Transform institutions data for dropdown
+  const getInstitutions = () => {
+    const institutions = institutionType === 'school' ? schools : colleges;
+    return institutions
+      .sort((a, b) => {
+        // Sort Kolkata institutions first, then alphabetically
+        const aKolkata = a.district === 'Kolkata' || a.district === 'Howrah';
+        const bKolkata = b.district === 'Kolkata' || b.district === 'Howrah';
+        if (aKolkata && !bKolkata) return -1;
+        if (!aKolkata && bKolkata) return 1;
+        return a.name.localeCompare(b.name);
+      })
+      .map(institution => ({
+        id: institution.id,
+        name: institution.name,
+        code: institution.code,
+        type: institution.type,
+        district: institution.district,
+        state: institution.state
+      }));
+  };
 
   const handleInstitutionSelect = (institutionId: string) => {
     const institutions = getInstitutions();
@@ -483,11 +486,23 @@ export function LoginPage({ onLogin, onAdminLogin }: LoginPageProps) {
                     <SelectContent>
                       {getInstitutions().map((institution) => (
                         <SelectItem key={institution.id} value={institution.id}>
-                          <div className="flex items-center justify-between w-full">
-                            <span className="break-words text-sm sm:text-base">{institution.name}</span>
-                            <Badge variant="outline" className="ml-2 text-xs capitalize">
-                              {institution.type}
-                            </Badge>
+                          <div className="flex items-start justify-between w-full max-w-full">
+                            <div className="flex-1 min-w-0">
+                              <div className="break-words text-sm sm:text-base font-medium">{institution.name}</div>
+                              <div className="text-xs text-gray-500 break-words">
+                                {institution.district}, {institution.state}
+                              </div>
+                            </div>
+                            <div className="flex flex-col items-end ml-2 space-y-1">
+                              <Badge variant="outline" className="text-xs capitalize">
+                                {institution.type}
+                              </Badge>
+                              {(institution.district === 'Kolkata' || institution.district === 'Howrah') && (
+                                <Badge variant="secondary" className="text-xs bg-orange-100 text-orange-700 border-orange-200">
+                                  কলকাতা
+                                </Badge>
+                              )}
+                            </div>
                           </div>
                         </SelectItem>
                       ))}
@@ -600,64 +615,65 @@ export function LoginPage({ onLogin, onAdminLogin }: LoginPageProps) {
                   <X className="h-4 w-4" />
                 </Button>
               </div>
-              <div className="mx-auto w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
-                <Lock className="w-6 h-6 text-white" />
+              
+              <div className="mx-auto w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Shield className="w-6 h-6 text-white" />
               </div>
-              <CardTitle className="text-xl text-red-600">SDMA Admin Login</CardTitle>
-              <CardDescription className="text-gray-600">
-                Enter admin credentials to access the dashboard
-              </CardDescription>
+              
+              <div>
+                <CardTitle className="text-xl text-red-600">SDMA Admin Access</CardTitle>
+                <CardDescription className="text-gray-600">
+                  Authorized personnel only
+                </CardDescription>
+              </div>
             </CardHeader>
+
             <CardContent className="space-y-4">
+              {adminError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700 break-words">
+                  {adminError}
+                </div>
+              )}
+              
               <form onSubmit={handleAdminSubmit} className="space-y-4">
-                {adminError && (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                    {adminError}
-                  </div>
-                )}
-                
                 <div className="space-y-2">
-                  <Label htmlFor="admin-email">Email Address</Label>
+                  <Label htmlFor="admin-email" className="text-gray-700 font-medium">Email</Label>
                   <Input
                     id="admin-email"
                     type="email"
-                    placeholder="Enter your admin email"
+                    placeholder="Enter admin email"
                     value={adminCredentials.email}
                     onChange={(e) => handleAdminCredentialChange('email', e.target.value)}
                     required
-                    className="bg-white border-gray-300 focus:border-red-500 focus:ring-red-500/20"
+                    className="bg-white border-gray-200 focus:border-red-400 focus:ring-red-400/20"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="admin-password">Admin Password</Label>
+                  <Label htmlFor="admin-password" className="text-gray-700 font-medium">Password</Label>
                   <div className="relative">
                     <Input
                       id="admin-password"
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       placeholder="Enter admin password"
                       value={adminCredentials.password}
                       onChange={(e) => handleAdminCredentialChange('password', e.target.value)}
                       required
-                      className="bg-white border-gray-300 focus:border-red-500 focus:ring-red-500/20 pr-10"
+                      className="bg-white border-gray-200 focus:border-red-400 focus:ring-red-400/20 pr-10"
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                       onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-0 top-0 h-full px-3 text-gray-400 hover:text-gray-600"
                     >
-                      {showPassword ? (
-                        <EyeOff className="h-4 w-4 text-gray-400" />
-                      ) : (
-                        <Eye className="h-4 w-4 text-gray-400" />
-                      )}
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </Button>
                   </div>
                 </div>
-                
-                <div className="flex space-x-3 pt-2">
+
+                <div className="flex space-x-3">
                   <Button
                     type="button"
                     variant="outline"
@@ -674,8 +690,7 @@ export function LoginPage({ onLogin, onAdminLogin }: LoginPageProps) {
                     type="submit"
                     className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white"
                   >
-                    <Lock className="w-4 h-4 mr-2" />
-                    Access Portal
+                    Login
                   </Button>
                 </div>
               </form>

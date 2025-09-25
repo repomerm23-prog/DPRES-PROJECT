@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './shared/ImageWithFallback';
 import { 
   Shield, 
   LayoutDashboard, 
@@ -150,7 +150,7 @@ export function LandingPage({ userData }: LandingPageProps) {
             
             <div className="relative">
               <ImageWithFallback 
-                src="https://images.unsplash.com/photo-1755548413928-4aaeba7c740e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjB0cmFpbmluZyUyMGRyaWxsJTIwc2Nob29sJTIwc3R1ZGVudHN8ZW58MXx8fHwxNzU3ODM0MjM2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="https://images.unsplash.com/photo-1755548413928-4aaeba7c740e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjB0cmFpbmluZyUyMGRyaWxsJTIwc3R1ZGVudHN8ZW58MXx8fHwxNzU3ODM0MjM2fDA&ixlib=rb-4.1.0&q=80&w=1080"
                 alt="Disaster preparedness education"
                 className="rounded-lg shadow-2xl w-full h-64 sm:h-80 lg:h-96 object-cover"
               />

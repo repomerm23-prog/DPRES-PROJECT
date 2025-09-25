@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './shared/ImageWithFallback';
 import { 
   Smartphone, 
   Play, 
@@ -261,7 +261,7 @@ export function VRTrainingPage() {
           <CardContent>
             <div className="relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-900 to-purple-900 h-32 sm:h-48 md:h-64">
               <ImageWithFallback 
-                src="https://images.unsplash.com/photo-1592814612565-4961b68b82f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aXJ0dWFsJTIwcmVhbGl0eSUyMGVkdWNhdGlvbnxlbnwxfHx8fDE3NTc4MzM0MTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="https://images.unsplash.com/photo-1592814612565-4961b68b82f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aXJ0dWFsJTIwcmVhbGl0eSUyMGVkdWNhdGlvbnxlbnwxfHx8fDE3NTc4MzM0MTN8MA&ixlib=rb-4.1.0&q=80&w=1080"
                 alt={t('vr.trainingEnvironmentAlt')}
                 className="w-full h-full object-cover opacity-70"
               />

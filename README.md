@@ -68,3 +68,65 @@ This project is open-source and available under the MIT License.
 - Proper line breaks for readability  
 - Inline links where useful  
 
+## 🚀 Features  
+
+- 📊 **Awareness Modules** – Information and training resources on disaster risk preparedness.  
+- 🏫 **Institution Mapping** – Visual representation of schools, colleges, and organizations adopting preparedness practices.  
+- ⚠️ **Real-Time Alerts** – Integration for notifications and alerts.  
+- 🎮 **VR Drills (Prototype)** – Interactive preparedness simulations.  
+- 🌍 **Government & NGO Alignment** – Supports guidelines from NDMA, AICTE, and UNDRR for disaster risk education.  
+
+---
+
+## 📂 Project Structure  
+
+- `/src` – Core source code for the platform.  
+- `/components` – UI components for reusable design elements.  
+- `/shared` – Context, constants, and shared logic.  
+- `/public` – Static assets.  
+
+---
+
+## 🛠️ Getting Started  
+
+### Prerequisites  
+Make sure you have the following installed:  
+- [Node.js](https://nodejs.org/) (>= 18.x recommended)  
+- npm (comes with Node.js)  
+
+### Installation  
+```bash
+# Install dependencies
+npm i
+
+Development
+
+# Start local development server
+npm run dev
+
+The project will be available at:
+👉 http://localhost:5173 (or as shown in your terminal).
+
+⸻
+
+🤝 Contribution
+
+Contributions are welcome!
+	•	Report issues in the Issues tab.
+	•	Suggest new features or enhancements.
+	•	Submit pull requests with improvements.
+
+⸻
+
+📜 License
+
+This project is open-source and available under the MIT License.
+
+---
+
+✨ This version uses:  
+- Consistent **Markdown headings** (`##`, `###`)  
+- Clean **bullet points with bold key terms**  
+- Proper line breaks for readability  
+- Inline links where useful  
+>>>>>>> a789f7f (optimized for better workflow)
